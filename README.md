@@ -20,7 +20,53 @@ Coercion-resistant authentication system with decoy mode and audit logging.
 ---
 
 ## Architecture
-(diagrama)
+```
+                +-------------------+
+                |      Client       |
+                | CLI / API caller  |
+                +---------+---------+
+                          |
+                          v
+                 +--------+--------+
+                 |      FastAPI     |
+                 |      API         |
+                 +--------+--------+
+                          |
+                          v
+                 +--------+--------+
+                 |   Auth Service   |
+                 | login / refresh  |
+                 +--------+--------+
+                          |
+                          v
+                 +--------+--------+
+                 | Session Manager |
+                 | token rotation  |
+                 +--------+--------+
+                          |
+                          v
+                 +--------+--------+
+                 |  Duress Policy  |
+                 | deception mode  |
+                 +--------+--------+
+                          |
+                          v
+                 +--------+--------+
+                 |   Alert Queue    |
+                 +--------+--------+
+                          |
+                          v
+                 +--------+--------+
+                 |      Worker      |
+                 | incident engine  |
+                 +--------+--------+
+                          |
+                          v
+          +---------------+---------------+
+          |                               |
+          v                               v
+   Admin Notification               Security Log
+   Email / SOC event                Metrics
 
 ---
 
